@@ -4,10 +4,18 @@ public class Point {
     private double pnt_x;
     private double pnt_y;
 
-    // constructors for points x and y
+    // constructors for a point with x and y
     public Point(double x, double y) {
         pnt_x = x;
         pnt_y = y;
+    }
+    
+    public double getX() {
+        return this.pnt_x;
+    }
+
+    public double getY() {
+        return this.pnt_y;
     }
 
     // reads in x and y and stores the point
