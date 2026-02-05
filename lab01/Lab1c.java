@@ -4,7 +4,7 @@ public class Lab1c {
         // get name
         String name = "";
         for(int i = 0; i <= args.length - 3; i++){
-            if(i != args.length - 4){
+            if(i != args.length - 3){
                 name += args[i] + " ";
             }
             else{
@@ -12,7 +12,7 @@ public class Lab1c {
             }
         }
 
-        // get numbers
+        // get numbers (use Integer.parseInt in order to processs the number strings as ints)
         int n = Integer.parseInt(args[args.length - 2]);
         int k = Integer.parseInt(args[args.length - 1]);
 
