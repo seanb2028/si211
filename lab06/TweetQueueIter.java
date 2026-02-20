@@ -40,41 +40,36 @@ public class TweetQueueIter extends TweetQueue {
   }
 
   public TweetQueueIter filter(String s) {
-
-    numTweets = 0;
     Iter itr = iterator();
     TweetQueueIter q = new TweetQueueIter();
     while(itr.hasNext()) {
       Tweet tweet = itr.next();
       if(tweet.getText().indexOf(s) != -1) {
-        numTweets++;
+        q.numTweets++;
         q.enqueue(tweet);
       }
     }
 
-    System.out.println(numTweets + " tweets");
+    System.out.println(q.numTweets + " tweets");
     return q;
   }
 
   public TweetQueueIter filterNot(String s) {
-
-    numTweets = 0;
     Iter itr = iterator();
     TweetQueueIter q = new TweetQueueIter();
     while(itr.hasNext()) {
       Tweet tweet = itr.next();
       if(tweet.getText().indexOf(s) == -1) {
-        numTweets++;
+        q.numTweets++;
         q.enqueue(tweet);
       }
     }
 
-    System.out.println(numTweets + " tweets");
+    System.out.println(q.numTweets + " tweets");
     return q;
   }
 
   public TweetQueueIter reset(Scanner fin) {
-
     TweetQueueIter q = new TweetQueueIter(fin);
     System.out.println(q.numTweets + " tweets");
     return q;
