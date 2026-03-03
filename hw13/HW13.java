@@ -15,6 +15,9 @@ public class HW13 {
             char c = sc.next().charAt(0);
             int k = sc.nextInt();
             int m = sc.nextInt();
+
+            if (k < 0 || m < 0) { throw new IllegalArgumentException(); }
+
             // computer special value
             char d = CharStuff.foo(c,k,m);
             if (d > 127 || d <= 32)
