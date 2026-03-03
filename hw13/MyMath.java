@@ -7,7 +7,7 @@ public class MyMath {
     {
         int r = 1;
         for(int i = 0; i < k; i++)
-        r = r*x % m;
+            r = r*x % m;
         return r;
     }
 }
