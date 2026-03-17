@@ -14,7 +14,7 @@ public class Queue
 
   public String dequeue() throws NullPointerException
   { 
-    if (head == null) { throw new NullPointerException("dequeue empty queue"); }
+    if (head == null) { throw new NullPointerException(); }
     Node t = head; 
     head = head.next;
     if (head == null)
@@ -29,13 +29,13 @@ public class Queue
   protected class Iter
   {
     private Node curr;
-    public Iter(Node start) throws NullPointerException { 
-      if (start == null) { throw new NullPointerException("iterator past end of queue"); }
+    public Iter(Node start) { 
       curr = start; 
     }
     public boolean hasNext() { return curr != null; }
-    public String next() 
+    public String next() throws NullPointerException 
     { 
+      if (curr == null) { throw new NullPointerException();}
       String s = curr.data; 
       curr = curr.next;  
       return s; 
