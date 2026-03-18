@@ -18,6 +18,7 @@ public class Lab09b {
         for (String arg : args) { // The colon iterates through the array of Strings
             if (arg.equals("-v")) { verbose = true; }
             else {
+                verbose = false;
                 try { sc = new Scanner(new FileReader(arg)); }
                 catch (IOException e) {
                     System.out.println("File '" + arg + "' could not be opened; switching input to standard in.");
