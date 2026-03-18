@@ -45,7 +45,7 @@ public class Lab09b {
                     String element = null;
                     try { element = sc.next(); } 
                     catch (NoSuchElementException e) {
-                        if (verbose) System.out.println("Unexpected end of input.");
+                        System.out.println("Unexpected end of input.");
                         System.exit(1); 
                     }
                     Q.enqueue(element);
@@ -58,8 +58,8 @@ public class Lab09b {
                     if (verbose) System.out.println("Unknown command '" + s +"'.");
                 }
             } while(true);
-        } catch (NoSuchElementException e) {
-            System.out.println("Unexpected end of input.");
+        } catch (Throwable t) {
+            t.printStackTrace();
         }
     }
 }
