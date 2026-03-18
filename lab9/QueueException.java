@@ -1,5 +1,5 @@
 // Author: Sean Beckford
-public class Queue
+public class QueueException
 {
   public void enqueue(String s)
   {
