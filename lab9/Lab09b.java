@@ -10,16 +10,20 @@ public class Lab09b {
         boolean verbose = false;
 
         // Handle command line arguments
-        if (args.length == 1 && args[0].equals("-v")) { verbose = true; }
-        else if (args.length == 1 && ! args[0].equals("-v")) {
-            try { sc = new Scanner(new FileReader(args[0])); } 
-            catch(IOException e) { 
-                System.out.println("File '" + args[0] + "' could not be opened; switching input to standard in."); 
-                verbose = true;
+        if (args.length > 2 ) {
+            System.out.println("Invalid input!");
+            System.exit(1);
+        }
+
+        for (String arg : args) { // The colon iterates through the array of Strings
+            if (arg.equals("-v")) { verbose = true; }
+            else {
+                try { sc = new Scanner(new FileReader(arg)); }
+                catch (IOException e) {
+                    System.out.println("File '" + arg + "' could not be opened; switching input to standard in.");
+                }
             }
         }
-        else if (args.length == 0) { /* keep verbose false */ }
-        else { System.out.println("Invalid input! java Lab09b <-v or filename>"); System.exit(1); }
 
         try {
             do {
@@ -36,7 +40,13 @@ public class Lab09b {
                     }
                 }
                 else if (s.equals("add")) {
-                    Q.enqueue(sc.next());
+                    String element = null;
+                    try { element = sc.next(); } 
+                    catch (NoSuchElementException e) {
+                        if (verbose) System.out.println("Unexpected end of input.");
+                        System.exit(1); 
+                    }
+                    Q.enqueue(element);
                 }
                 else if (s.equals("dump")) {
                     try { System.out.println(Q.dump()); }
@@ -47,7 +57,7 @@ public class Lab09b {
                 }
             } while(true);
         } catch (NoSuchElementException e) {
-            System.out.println("ctrl-d");
+            System.out.println("Unexpected end of input.");
         }
     }
 }
