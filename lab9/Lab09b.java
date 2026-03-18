@@ -21,6 +21,7 @@ public class Lab09b {
                 try { sc = new Scanner(new FileReader(arg)); }
                 catch (IOException e) {
                     System.out.println("File '" + arg + "' could not be opened; switching input to standard in.");
+                    verbose = true;
                 }
             }
         }
