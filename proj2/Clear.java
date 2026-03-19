@@ -6,6 +6,12 @@
  */
 public class Clear extends Cipher {
   public String getAlgName() { return "clear"; }
-  public String encrypt(String plain) { return plain; }
-  public String decrypt(String cipher){ return cipher; }
+  public String encrypt(String plain) throws CipherException { 
+    char[] p = plain.toCharArray();
+    for(int i = 0; i < p.length; i++) { checkBounds(p[i], "plaintext"); }
+    return new String(p); 
+  }
+  public String decrypt(String cipher) { 
+    return cipher;
+  }
 }
