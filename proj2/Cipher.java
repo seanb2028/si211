@@ -1,11 +1,11 @@
 /**
- * This class serves as a base class for the
- * Caesar and Vigenere ciphers to eliminate 
- * duplication of code.
+ * This class serves as a pure abstract base 
+ * class that provides shared implementation
+ * for all ciphers to eliminate duplication of code.
  * 
  * @author Sean Beckford
  */
-public abstract class Cipher implements Encryptor {
+public abstract class Cipher {
     protected char[] shift;
 
     public void checkBounds(char c, String type) throws CipherException {

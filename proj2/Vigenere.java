@@ -4,7 +4,7 @@
  * 
  * @author Sean Beckford
  */
-public class Vigenere extends Cipher {
+public class Vigenere extends ShiftCipher {
     public String getAlgName() { return "vigenere"; }
 
     // Vigenere shift encryption

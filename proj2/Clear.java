@@ -4,7 +4,7 @@
  * 
  * @author Sean Beckford
  */
-public class Clear extends Cipher {
+public class Clear extends ShiftCipher {
   public String getAlgName() { return "clear"; }
   public String encrypt(String plain) throws CipherException { 
     char[] p = plain.toCharArray();

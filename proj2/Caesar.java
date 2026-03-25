@@ -4,7 +4,7 @@
  * 
  * @author Sean Beckford
  */
-public class Caesar extends Cipher {
+public class Caesar extends ShiftCipher {
     private char sc; // Shift character
 
     public String getAlgName() { return "caesar"; }
