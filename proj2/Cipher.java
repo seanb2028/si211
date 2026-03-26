@@ -5,15 +5,19 @@
  * 
  * @author Sean Beckford
  */
-public abstract class Cipher {
+public abstract class Cipher implements Encryptor {
     protected char[] shift;
 
     public void checkBounds(char c, String type) throws CipherException {
-        if (42 > (int) c || (int) c > 122) throw new CipherException("error " + c + " not allowed in " + type);
+        if (42 > (int) c || (int) c > 122) {
+            throw new CipherException("error " + c + " not allowed in " + type);
+        }
     }
 
     public void init(char[] key) throws CipherException { 
-        for (int i = 0; i < key.length; i++) { checkBounds(key[i], "key"); }
+        for (int i = 0; i < key.length; i++) { 
+            checkBounds(key[i], "key"); 
+        }
         this.shift = key; 
     }
 }

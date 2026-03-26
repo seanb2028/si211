@@ -1,13 +1,17 @@
 /**
  * @author Sean Beckford
  */
-public class Padcut extends Cipher implements Hasher {
-    public String getAlgName() { return "padcut"; }
+public class Padcut extends Hasher {
+    public String getAlgName() { 
+        return "padcut"; 
+    }
+
     // Hash algorithm for the password
-    public String hashInto(char[] pass) {
+    public <T extends Encryptor> String hashInto(char[] pass, T enc) throws CipherException {
         String hash = "";
         if (pass.length < 16) {
-            hash = new String(pass); 
+            // Clear encryption (does nothing
+            hash = enc.encrypt(new String(pass)); 
             for (int i = pass.length; i < 16; i++)
                 hash += "x";
         }

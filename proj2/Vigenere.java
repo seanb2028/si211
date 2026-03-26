@@ -1,11 +1,19 @@
+import javax.crypto.Cipher;
+
 /**
  * Implementation of a Vigenere cipher encryption algorithm
  * using the Encryptor interface.
  * 
  * @author Sean Beckford
  */
-public class Vigenere extends ShiftCipher {
+public class Vigenere extends Cipher {
     public String getAlgName() { return "vigenere"; }
+
+    public char computeShift(int k, int c_i) {
+        int p = c_i - 42;
+        int c = (p + k) % 81;
+        return (char) (42 + c);
+    }
 
     // Vigenere shift encryption
     public String encrypt(String plain) throws CipherException {
@@ -13,9 +21,7 @@ public class Vigenere extends ShiftCipher {
         for (int i = 0; i < cipher.length; i++) {
             checkBounds(cipher[i], "plaintext");
             int k = (int) shift[i % shift.length] - 42; // To handle keys smaller than plaintext
-            int p = (int) cipher[i] - 42;
-            int c = (p + k) % 81;
-            cipher[i] = (char) (42 + c);
+            cipher[i] = computeShift(k, (int) cipher[i]);
         }
 
         return new String(cipher);

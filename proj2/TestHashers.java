@@ -16,7 +16,7 @@ public class TestHashers {
         System.out.print("password : ");
         char[] password = System.console().readPassword();
 
-        // Find encryptor (throw exception if not found)
+        // Find hasher (throw exception if not found)
         int i = 0;
         while(i < H.size() && !H.get(i).getAlgName().equals(encalg))
             i++;
@@ -24,9 +24,9 @@ public class TestHashers {
             throw new Exception("Unknown algorithm '"+encalg+"'.");
         Hasher hash = H.get(i);
 
-        // Encrypt, decrypt print sumamry of results
+        // Encrypt, decrypt print summary of results
         hash.init(password);
-        String hashtext = hash.hashInto(password);
+        String hashtext = hash.hashInto(password, hash);
         System.out.println("password read : " + new String(password));
         System.out.println("hash computed : " + hashtext);
     }
