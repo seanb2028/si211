@@ -5,6 +5,8 @@
  * 
  * @author Sean Beckford
  */
+import java.util.*;
+
 public abstract class Cipher {
     protected char[] shift;
 

@@ -6,9 +6,9 @@ public class TestHashers {
     public static void main(String[] args) throws Throwable {
         // Create ArrayList of all supported encryptors
         ArrayList<Hasher> H = new ArrayList<Hasher>();
-        H.add(new Padcut());
-        H.add(new ShiftCaesar());
-        H.add(new ShiftVigenere());
+        H.add(new Padcut()); // padcut
+        H.add(new ShiftCaesar()); // shift+caesar
+        H.add(new ShiftVigenere()); // shift+vigenere
 
         // Get alg,psw from user
         System.out.print("algorithm: ");
