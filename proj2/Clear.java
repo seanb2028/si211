@@ -4,21 +4,10 @@
  * 
  * @author Sean Beckford
  */
-public class Clear extends Cipher {
-  public String getAlgName() { 
-    return "clear"; 
-  }
+public class Clear extends ShiftCipher {
+    public String getAlgName() { return "clear"; }
 
-  // Returns the same string
-  public String encrypt(String plain) throws CipherException { 
-    char[] p = plain.toCharArray();
-    for(int i = 0; i < p.length; i++) { 
-      checkBounds(p[i], "plaintext"); 
+    protected int getShiftAt(int index) {
+        return 0; // Clear cipher has no shift
     }
-    return new String(p); 
-  }
-
-  public String decrypt(String cipher) { 
-    return cipher;
-  }
 }
