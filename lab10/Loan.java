@@ -58,6 +58,8 @@ public class Loan {
 
         f.add(bot, BorderLayout.SOUTH);
 
+        calculate.addActionListener(new ButtonClickListener(amount, rate, payment, payoff, totalCost));
+
         f.pack();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
