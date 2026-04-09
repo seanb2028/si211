@@ -1,4 +1,6 @@
 /**
+ * Logic class to calculate loan payoff rates
+ * 
  * Sean Beckford and Sam Pirkl
  */
 public class Calc {
