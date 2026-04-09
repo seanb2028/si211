@@ -5,7 +5,9 @@
  * 
  * @author Sean Beckford
  */
-public abstract class Cipher implements Encryptor {
+import java.util.*;
+
+public abstract class Cipher {
     protected char[] shift;
 
     public void checkBounds(char c, String type) throws CipherException {

@@ -1,8 +1,8 @@
 /**
  * @author Sean Beckford
  */
-public class ShiftVigenere extends Hasher {
-    public String getAlgName() { 
-        return "shift+vigenere"; 
-    }
+public class ShiftVigenere extends ShiftHasher {
+    protected Encryptor getEncryptor() { return new Vigenere(); }
+
+    public String getAlgName() { return "shift+vigenere"; }
 }
