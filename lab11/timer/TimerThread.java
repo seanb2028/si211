@@ -3,8 +3,6 @@
  * 
  * @author Sean Beckford
  */
-import javax.swing.*;
-
 public class TimerThread extends Thread {
     private CountdownStrip strip;
 
