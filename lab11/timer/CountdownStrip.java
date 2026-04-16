@@ -21,8 +21,13 @@ public class CountdownStrip extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (tThread == null || !tThread.isAlive()) {
-                tThread = new TimerThread();
-                tThread.start();    
+                try {
+                    time = Integer.parseInt(timeInput.getText());
+                    tThread = new TimerThread(CountdownStrip.this);
+                    tThread.start();   
+                } catch (Exception t) {
+                    timeLeft.setText("ERROR");
+                }  
             }
         }
     }
@@ -30,16 +35,18 @@ public class CountdownStrip extends JPanel {
     // Our updater for our timer thread
     public void update() throws Exception { 
         while (time > 0) {
-            time -= 1;
             timeLeft.setText(String.valueOf(time));
             Thread.sleep(1000);
+            time -= 1;
         }
+        timeLeft.setText("DONE");
     }
 
     public CountdownStrip() {
         // Label
         timeLeft = new JLabel("DONE");
         timeLeft.setForeground(Color.RED);
+        timeLeft.setPreferredSize(new Dimension(60,15));
         add(timeLeft);
         // Text Field
         timeInput = new JTextField(10);
@@ -47,7 +54,6 @@ public class CountdownStrip extends JPanel {
         // Button
         countdown = new JButton("countdown");
         add(countdown);
-        if (!timeInput.getText().isEmpty())
-            countdown.addActionListener(new CountdownClickListener());
+        countdown.addActionListener(new CountdownClickListener());
     }
 }
