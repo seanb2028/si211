@@ -1,5 +1,5 @@
 /**
- * This is an strip for a countdown timer.
+ * This is a strip for a countdown timer.
  * 
  * @author Sean Beckford
  */
@@ -17,7 +17,7 @@ public class CountdownStrip extends JPanel {
     private class CountdownClickListener implements ActionListener {     
         private TimerThread tThread;
 
-        // When someone clicks the button, run the math
+        // When someone clicks the button, run the timer
         @Override
         public void actionPerformed(ActionEvent e) {
             if (tThread == null || !tThread.isAlive()) {
