@@ -9,15 +9,21 @@ import java.awt.event.*;
 
 public class Tile extends JPanel {
     private JButton t;
+    private boolean tileActivated = false;
 
-    private class TileClickListener implements ActionListener {     
+    private class TileClickListener implements MouseListener {     
         @Override
-        public void actionPerformed(ActionEvent e) { 
+        public void mousePressed(MouseEvent e) { 
+            System.out.println("Tile pressed");
+            if (tileActivated == false) { tileActivated = true; }
         }
     }
 
     public Tile() {
         t = new JButton();
         t.setPreferredSize(new Dimension(100,100));
+        add(t);
+
+        t.addActionListener(new TileClickListener());
     }
 }
