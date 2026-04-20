@@ -11,11 +11,16 @@ public class Tile extends JPanel {
     private JButton t;
     private boolean tileActivated = false;
 
-    private class TileClickListener implements MouseListener {     
+    private class TileClickListener extends MouseAdapter {     
         @Override
         public void mousePressed(MouseEvent e) { 
-            System.out.println("Tile pressed");
-            if (tileActivated == false) { tileActivated = true; }
+            System.out.println("\tTile pressed");
+            tileActivated = (!tileActivated) ? true : false;
+            System.out.println("Tile " + ((tileActivated) ? "activated" : "deactivated"));
+        } 
+        @Override
+        public void mouseReleased(MouseEvent e) { 
+            System.out.println("\tTile released");
         }
     }
 
@@ -24,6 +29,6 @@ public class Tile extends JPanel {
         t.setPreferredSize(new Dimension(100,100));
         add(t);
 
-        t.addActionListener(new TileClickListener());
+        t.addMouseListener(new TileClickListener());
     }
 }
