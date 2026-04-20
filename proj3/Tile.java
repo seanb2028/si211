@@ -11,19 +11,26 @@ public class Tile extends JPanel {
     private JButton t;
     private boolean tileActivated = false;
 
-    private class TileClickListener implements MouseListener {     
-        @Override
+    private class TileClickListener extends MouseAdapter {    
+        @Override 
         public void mousePressed(MouseEvent e) { 
             System.out.println("Tile pressed");
-            if (tileActivated == false) { tileActivated = true; }
+            tileActivated = (!tileActivated) ? true : false;
+            System.out.println("Tile " + ((tileActivated) ? "activated" : "deactivated"));
+        }
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            System.out.println("Tile released");
         }
     }
 
     public Tile() {
         t = new JButton();
         t.setPreferredSize(new Dimension(100,100));
+        t.setBackground(Color.WHITE);
+        t.setBorder(BorderFactory.createLineBorder(Color.black));
         add(t);
 
-        t.addActionListener(new TileClickListener());
+        t.addMouseListener(new TileClickListener());
     }
 }
