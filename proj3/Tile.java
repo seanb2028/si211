@@ -14,10 +14,10 @@ public class Tile extends JPanel {
     private JButton t;
     private boolean tileActivated = false;
 
+    // Inner class in order to process tile pressing/releasing
     private class TileListener extends MouseAdapter {     
         @Override
         public void mousePressed(MouseEvent e) { 
-            System.out.println("\tTile " + p.toString() + " pressed");
             tileActivated = (!tileActivated) ? true : false;
             System.out.println("Tile " + p.toString() + ((tileActivated) ? " activated" : " deactivated"));
         } 
@@ -26,6 +26,10 @@ public class Tile extends JPanel {
             System.out.println("\tTile " + p.toString() + " released");
         }
     }
+
+    // Getters
+    public int getKindID() { return kindID; }
+    public Pos getPos() { return p; }
 
     public Tile(int row, int col, int kindID) {
         this.p = new Pos(row, col);

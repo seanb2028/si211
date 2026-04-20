@@ -16,11 +16,10 @@ public class Board extends JFrame {
 
         for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 6; col++) {
-                add(new Tile(row, col, kindIDs[row][col]));
+                add(new Tile(row, col, kindIDs[row][col])); 
             }
         }
-
+        
         pack();
     }
-
 }
