@@ -1,25 +1,38 @@
 /**
- * This is the class for the matching logic.
+ * This class handles the matching logic for the game.
  * 
  * @author Sean Beckford
  */
+import java.util.*;
 
-public class Match {
-    public Tile a, b;
-    
-    public Match(Tile a, Tile b) {
-        this.a = a;
-        this.b = b;
+public class Match implements StateListener {
+    private List<Tile> tiles = new ArrayList<>();
+
+    // State listener method
+    public void activated(Tile t) {
+        tiles.add(t);
+        t.disable();
+        if (tiles.size() == 2) checkMatch();
     }
 
-    public boolean checkMatch() { 
-        if (a.getKindID() == b.getKindID()) {
-            System.out.println("Tile " + a.getPos().toString() + " matched");
-            System.out.println("Tile " + b.getPos().toString() + " matched");
-            return true;
+    // Checks the two tiles to see if they match and prints out the result
+    private void checkMatch() {
+        boolean matched = (tiles.get(0).getKindID() == tiles.get(1).getKindID() && tiles.get(0).getPos() != tiles.get(1).getPos());
+
+        System.out.print("Tile " + tiles.get(0).getPosString() + " and Tile " + tiles.get(1).getPosString() + " colors ");
+        System.out.println((matched) ? "match" : "don't match");
+        
+        if (matched) {
+            for (Tile t : tiles)
+                t.permanentlyDisable();
         }
-        return false;
+        else {
+            for (Tile t : tiles) {
+                t.enable();
+                t.setActivatedFalse();
+            }
+        }
+        
+        tiles.clear();
     }
-
-    
 }

@@ -1,9 +1,9 @@
 /**
+ * This is the interface for the states of the tiles.
+ * 
  * @author Sean Beckford
  */
 
-public interface StateListener
-{
-  public void activated(Tile t);
-  public void deactivated(Tile t);
+public interface StateListener {
+    public void activated(Tile t);
 }
