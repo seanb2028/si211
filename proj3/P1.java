@@ -9,9 +9,11 @@ import java.awt.event.*;
 
 public class P1 {
     public static void main(String[] args) {
-        JFrame board = new Board();
+        JFrame gui = new JFrame();
+        gui.add(new Board(), BorderLayout.CENTER);
 
-        board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        board.setVisible(true);
+        gui.pack();
+        gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gui.setVisible(true);
     }
 }

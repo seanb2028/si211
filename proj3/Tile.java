@@ -11,32 +11,54 @@ import si211.*;
 public class Tile extends JPanel {
     private Pos p;
     private int kindID;
-    private JButton t;
     private boolean tileActivated = false;
+    private TileListener tListener = new TileListener();
+    private StateListener sListener;
 
+    // Inner class to register mouse presses on the tile
     private class TileListener extends MouseAdapter {     
         @Override
         public void mousePressed(MouseEvent e) { 
-            System.out.println("\tTile " + p.toString() + " pressed");
-            tileActivated = (!tileActivated) ? true : false;
-            System.out.println("Tile " + p.toString() + ((tileActivated) ? " activated" : " deactivated"));
+            tileActivated = !tileActivated;
+            if (sListener != null) {
+                if (tileActivated)
+                    sListener.activated(Tile.this);
+            }
         } 
-        @Override
-        public void mouseReleased(MouseEvent e) { 
-            System.out.println("\tTile " + p.toString() + " released");
-        }
+    }
+
+    // To add state listeners to tiles
+    public void addStateListener(StateListener sListener) { this.sListener = sListener; }
+    
+    // Setters
+    public void setActivatedFalse() { tileActivated = false; }
+
+    // Getters
+    public int getKindID() { return kindID; }
+    public Pos getPos() { return p; }
+    public String getPosString() { return p.toString(); }
+
+    // Modify mouse clicks on tile
+    public void disable() { removeMouseListener(tListener); }
+    public void enable() { addMouseListener(tListener); }
+
+    // Deactivates the tile permanently
+    public void permanentlyDisable() {
+        setActivatedFalse();
+
+        disable();
+        setBackground(Color.WHITE);
+        repaint();
     }
 
     public Tile(int row, int col, int kindID) {
         this.p = new Pos(row, col);
         this.kindID = kindID;
 
-        t = new JButton();
-        t.setPreferredSize(new Dimension(100,100));
-        t.setBackground(P3Tools.getSwatchColor(kindID));
-        t.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-        add(t);
+        setPreferredSize(new Dimension(100,100));
+        setBackground(P3Tools.getSwatchColor(kindID));
+        setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
-        t.addMouseListener(new TileListener());
+        enable();
     }
 }
