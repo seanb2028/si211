@@ -19,6 +19,7 @@ public class Tile extends JPanel {
         @Override
         public void mousePressed(MouseEvent e) { 
             tileActivated = (!tileActivated) ? true : false;
+            System.out.println("\tTile " + p.toString() + " pressed");
             System.out.println("Tile " + p.toString() + ((tileActivated) ? " activated" : " deactivated"));
         } 
         @Override
@@ -35,12 +36,11 @@ public class Tile extends JPanel {
         this.p = new Pos(row, col);
         this.kindID = kindID;
 
-        t = new JButton();
-        t.setPreferredSize(new Dimension(100,100));
-        t.setBackground(P3Tools.getSwatchColor(kindID));
-        t.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-        add(t);
+        this.setPreferredSize(new Dimension(100,100));
+        this.setBackground(P3Tools.getSwatchColor(kindID));
+        //t.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
-        t.addMouseListener(new TileListener());
+
+        this.addMouseListener(new TileListener());
     }
 }
