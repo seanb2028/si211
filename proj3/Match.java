@@ -12,6 +12,7 @@ public class Match implements StateListener {
     public void activated(Tile t) {
         tiles.add(t);
         t.disable();
+        t.repaint();
         if (tiles.size() == 2) checkMatch();
     }
 
@@ -29,6 +30,7 @@ public class Match implements StateListener {
         else {
             for (Tile t : tiles) {
                 t.enable();
+                t.repaint();
                 t.setActivatedFalse();
             }
         }
