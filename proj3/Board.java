@@ -4,7 +4,6 @@
  * @author Sean Beckford
  */
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 import si211.P3Tools;
