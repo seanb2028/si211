@@ -5,7 +5,7 @@
  */
 import java.util.*;
 
-public class Match implements StateListener {
+public class Match implements TileStateListener {
     private List<Tile> tiles = new ArrayList<>();
 
     // State listener method

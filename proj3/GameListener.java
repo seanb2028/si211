@@ -5,6 +5,6 @@
  */
 
 public interface GameListener {
-    public void onGameStarted();
-    public void onGameOver();
+    public void onGameStart();
+    public void onGameInterrupt();
 }

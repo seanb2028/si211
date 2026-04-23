@@ -12,15 +12,29 @@ import si211.P3Tools;
 
 public class Board extends JPanel {
     private List<Tile> tiles = new ArrayList<>();
+    private BoardListener bListener;
     
     public void disableAll() {
         for (Tile t : tiles)
             t.disable();
     }
+    
     public void enableAll() {
         for (Tile t : tiles)
-            t.enable();
+            if (!t.getMatched()) 
+                t.enable();
+            checkAllTilesMatched();
     }
+
+    public void checkAllTilesMatched() {
+        for (Tile t : tiles)
+            if (!t.getMatched())
+                return;
+        bListener.onGameWon();
+    }
+
+    // Add listener to the board
+    public void addBoardListener(BoardListener bL) { this.bListener = bL; }
 
     public Board() {
         Match m = new Match();
@@ -32,7 +46,7 @@ public class Board extends JPanel {
             for (int col = 0; col < 6; col++) {
                 Tile t = new Tile(row, col, kindIDs[row][col]);
                 tiles.add(t);
-                t.addStateListener(m);
+                t.addTileStateListener(m);
                 add(t);
             }
         }

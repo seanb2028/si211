@@ -4,6 +4,6 @@
  * @author Sean Beckford
  */
 
-public interface StateListener {
+public interface TileStateListener {
     public void activated(Tile t);
 }

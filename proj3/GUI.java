@@ -9,19 +9,20 @@ import java.awt.event.*;
 
 public class GUI extends JFrame implements GameListener {
     private Board board;
+    private Clock clock;
     
     @Override
-    public void onGameStarted() {
+    public void onGameStart() {
         board.enableAll();
     }
     @Override
-    public void onGameOver() {
+    public void onGameInterrupt() {
         board.disableAll();
     }
 
     public GUI() {
         // CLOCK
-        Clock clock = new Clock();
+        clock = new Clock();
         clock.addGameListener(this);
         add(clock, BorderLayout.NORTH);
 
