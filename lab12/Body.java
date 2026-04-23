@@ -4,7 +4,8 @@
  * @author Sean Beckford
  */
 public class Body {
-    private double o_center, o_radius, radius, angle, angularV, color;
+    private double orbCenter, orbRadius, bodyRadius, angle, angularV;
+    private Color color;
 
     public Body(double x, double y) {
         this.x = x;
@@ -12,6 +13,6 @@ public class Body {
     }
 
     public void step() {
-
+        
     }
 }
