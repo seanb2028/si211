@@ -7,12 +7,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class GUI extends JFrame {
+public class GUI extends JFrame implements GameListener {
+    private Board board;
+    
+    @Override
+    public void onGameStarted() {
+        board.enableAll();
+    }
+    @Override
+    public void onGameOver() {
+        board.disableAll();
+    }
+
     public GUI() {
-        JPanel clock = new Clock();
+        // CLOCK
+        Clock clock = new Clock();
+        clock.addGameListener(this);
         add(clock, BorderLayout.NORTH);
 
-        JPanel board = new Board();
+        // BOARD
+        board = new Board();
         add(board, BorderLayout.CENTER);
 
         pack();

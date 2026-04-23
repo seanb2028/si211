@@ -32,7 +32,7 @@ public class Tile extends JPanel {
     public void addStateListener(StateListener sListener) { this.sListener = sListener; }
     
     // Setters
-    public void setActivatedFalse() { tileActivated = false; }
+    public void setActivated(boolean bool) { tileActivated = bool; }
 
     // Getters
     public int getKindID() { return kindID; }
@@ -45,7 +45,7 @@ public class Tile extends JPanel {
 
     // Deactivates the tile permanently
     public void permanentlyDisable() {
-        setActivatedFalse();
+        setActivated(false);
 
         disable();
         setBackground(Color.WHITE);
@@ -72,6 +72,6 @@ public class Tile extends JPanel {
         setBackground(P3Tools.getSwatchColor(kindID));
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
-        enable();
+        disable();
     }
 }

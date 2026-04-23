@@ -11,6 +11,7 @@ public class Clock extends JPanel {
     private JLabel timeLeft;
     private int time;
     private JButton start;
+    private GameListener gListener;
 
     // Inner class for start button listener
     private class StartClickListener implements ActionListener {     
@@ -19,12 +20,31 @@ public class Clock extends JPanel {
         // When someone clicks the button, run the timer
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (tThread == null || !tThread.isAlive()) {
-                time = 60;
+            if (start.getText().equals("start")) {
+                if (tThread == null || !tThread.isAlive()) {
+                    start.setText("pause");
+                    time = 60;
+                    if (gListener != null) gListener.onGameStarted();
+                    tThread = new TimerThread(Clock.this);
+                    tThread.start();   
+                }
+            }
+            else if (start.getText().equals("pause")) {
+                start.setText("resume");
+                tThread.interrupt();
+
+            }
+            else if (start.getText().equals("resume")) {
+                start.setText("pause");
                 tThread = new TimerThread(Clock.this);
-                tThread.start();   
+                tThread.start();
             }
         }
+    }
+
+    // Add game listeners to the clock
+    public void addGameListener(GameListener gL) {
+        this.gListener = gL;
     }
 
     // Our updater for our timer thread
@@ -39,12 +59,13 @@ public class Clock extends JPanel {
             Thread.sleep(1000);
             time -= 1;
         }
-        timeLeft.setText("1:00");
+        timeLeft.setText("00:00");
+        if (gListener != null) gListener.onGameOver();
     }
 
     public Clock() {
         // START TEXT LABEL
-        JLabel startText = new JLabel("Press 'start' to play");
+        JLabel startText = new JLabel("Get ready to play!");
         startText.setPreferredSize(new Dimension(300, 15));
         add(startText);
 

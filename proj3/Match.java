@@ -31,7 +31,7 @@ public class Match implements StateListener {
             for (Tile t : tiles) {
                 t.enable();
                 t.repaint();
-                t.setActivatedFalse();
+                t.setActivated(false);
             }
         }
         
