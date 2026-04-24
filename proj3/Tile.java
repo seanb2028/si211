@@ -13,8 +13,9 @@ public class Tile extends JPanel {
     private Pos p;
     private int kindID;
     private boolean tileActivated = false;
+    private boolean tileMatched = false;
     private TileListener tListener = new TileListener();
-    private StateListener sListener;
+    private TileStateListener sListener;
 
     // Inner class to register mouse presses on the tile
     private class TileListener extends MouseAdapter {     
@@ -29,7 +30,7 @@ public class Tile extends JPanel {
     }
 
     // To add state listeners to tiles
-    public void addStateListener(StateListener sListener) { this.sListener = sListener; }
+    public void addTileStateListener(TileStateListener sListener) { this.sListener = sListener; }
     
     // Setters
     public void setActivated(boolean bool) { tileActivated = bool; }
@@ -38,6 +39,7 @@ public class Tile extends JPanel {
     public int getKindID() { return kindID; }
     public Pos getPos() { return p; }
     public String getPosString() { return p.toString(); }
+    public boolean getMatched() { return tileMatched; }
 
     // Modify mouse clicks on tile
     public void disable() { removeMouseListener(tListener); }
@@ -46,6 +48,7 @@ public class Tile extends JPanel {
     // Deactivates the tile permanently
     public void permanentlyDisable() {
         setActivated(false);
+        tileMatched = true;
 
         disable();
         setBackground(Color.WHITE);

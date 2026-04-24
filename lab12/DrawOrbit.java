@@ -8,14 +8,14 @@ import java.awt.*;
 import javax.swing.*;
 
 public class DrawOrbit extends JComponent {
+    private Body body;
+
     public DrawOrbit() {
         super();
         setPreferredSize(new Dimension(500,400));
     }
 
-    public void step() {
-        
-    }
+    public void step() { body.step(); }
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

@@ -7,8 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Clock extends JPanel {
-    private JLabel timeLeft;
+public class Clock extends JPanel implements BoardListener {
+    private JLabel timeLeft, stateText;
     private int time;
     private JButton start;
     private GameListener gListener;
@@ -20,25 +20,34 @@ public class Clock extends JPanel {
         // When someone clicks the button, run the timer
         @Override
         public void actionPerformed(ActionEvent e) {
+            // GAME STARTED
             if (start.getText().equals("start")) {
                 if (tThread == null || !tThread.isAlive()) {
+                    stateText.setText("Hurry up, the clock's running!");
                     start.setText("pause");
                     time = 60;
-                    if (gListener != null) gListener.onGameStarted();
+                    if (gListener != null) gListener.onGameStart();
                     tThread = new TimerThread(Clock.this);
                     tThread.start();   
                 }
             }
+            // GAME PAUSED
             else if (start.getText().equals("pause")) {
+                gListener.onGameInterrupt();
+                stateText.setText("Paused! Give your brain a break!");
                 start.setText("resume");
                 tThread.interrupt();
-
             }
+            // GAME RESUMED
             else if (start.getText().equals("resume")) {
+                gListener.onGameStart();
+                stateText.setText("Hurry up, the clock's running!");
                 start.setText("pause");
                 tThread = new TimerThread(Clock.this);
                 tThread.start();
             }
+            // GAME FINISHED
+            else { System.exit(0); }
         }
     }
 
@@ -47,9 +56,19 @@ public class Clock extends JPanel {
         this.gListener = gL;
     }
 
+    @Override
+    public void onGameWon() {
+        stateText.setText("Congrats, you won! It took you " + (60 - time) + " seconds!");
+        start.setText("exit");
+    }
+    public void onGameLost() {
+        stateText.setText("Sorry, you lost!");
+        start.setText("exit");
+    }
+
     // Our updater for our timer thread
     public void update() throws Exception { 
-        while (time > 0) {
+        while (time >= 0) {
             timeLeft.setText(
                 ((time == 60) ? "01:" : "00:") + 
                 ((time < 10) ? "0" : "") +
@@ -59,18 +78,19 @@ public class Clock extends JPanel {
             Thread.sleep(1000);
             time -= 1;
         }
-        timeLeft.setText("00:00");
-        if (gListener != null) gListener.onGameOver();
+        onGameLost();
+        gListener.onGameInterrupt();
     }
 
     public Clock() {
         // START TEXT LABEL
-        JLabel startText = new JLabel("Get ready to play!");
-        startText.setPreferredSize(new Dimension(300, 15));
-        add(startText);
+        stateText = new JLabel("Get ready to play!");
+        stateText.setPreferredSize(new Dimension(300, 30));
+        add(stateText);
 
         // START/PAUSE BUTTON
         start = new JButton("start");
+        start.setPreferredSize(new Dimension(100, 20));
         add(start, BorderLayout.EAST);
         start.addActionListener(new StartClickListener());
 

@@ -36,6 +36,9 @@ public class GUI extends JFrame {
         // ORBITS
         JComponent orbit = new DrawOrbit();
         add(orbit, BorderLayout.CENTER);
+        
+        Thread t = new Thread(orbit);
+        t.start();
 
         pack();
     }    
