@@ -11,10 +11,13 @@ public class AniThread extends Thread {
 
     @Override
     public void run() {
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
             try {
                 Thread.sleep(20);
-            } catch (Exception e) {}
+            } catch (Exception e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
             dOrbit.step();
             dOrbit.repaint();
         }
