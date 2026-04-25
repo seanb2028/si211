@@ -20,24 +20,27 @@ public class Board extends JPanel {
     }
     
     public void enableAll() {
-        for (Tile t : tiles)
+        for (Tile t : tiles) {
             if (!t.getMatched()) 
                 t.enable();
-            checkAllTilesMatched();
+        }
+        checkAllTilesMatched();
     }
 
     public void checkAllTilesMatched() {
-        for (Tile t : tiles)
+        for (Tile t : tiles) {
             if (!t.getMatched())
                 return;
-        bListener.onGameWon();
+        }
+        if (bListener != null)
+            bListener.onGameWon();
     }
 
     // Add listener to the board
     public void addBoardListener(BoardListener bL) { this.bListener = bL; }
 
     public Board() {
-        Match m = new Match();
+        Match m = new Match(this);
 
         setLayout(new GridLayout(6, 6, 0, 0));
         int[][] kindIDs = P3Tools.getRandomKindIdAssignments((int) System.currentTimeMillis(), 18, 6);

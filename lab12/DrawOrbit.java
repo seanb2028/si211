@@ -22,12 +22,20 @@ public class DrawOrbit extends JComponent {
     }
 
     public void addOrbit(double radius, Color color) {
-        orbits.add(new Orbit(255, 175, radius, color));
+        Orbit last = orbits.get(orbits.size() - 1);
+        Body parent = last.getBody();
+        orbits.add(new Orbit(parent.getOuterBodyX(), parent.getOuterBodyY(), radius, color));
     }
 
     public void step() { 
-        for (Orbit o : orbits)
+        for (int i = 0; i < orbits.size(); i++) {
+            Orbit o = orbits.get(i);
+            if (i > 0) {
+                Body parentOrbit = orbits.get(i - 1).getBody();
+                o.setCenter(parentOrbit);
+            }
             o.step();
+        }
     }
 
     protected void paintComponent(Graphics g) {

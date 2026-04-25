@@ -19,8 +19,18 @@ public class Body {
         this.color = c;
     }
 
+    // Setters
+    public void setCenterBodyX(double x) { centerBodyX = x; }
+    public void setCenterBodyY(double y) { centerBodyY = y; }
+
+    // Getters
+    public double getOuterBodyX() { return outerBodyX; }
+    public double getOuterBodyY() { return outerBodyY; }
+
     public void step() {
-        angle += 0.02;  
+        double speed = 2.5 / orbRadius;
+        angle += speed;  
+
         outerBodyX = centerBodyX + (orbRadius * Math.cos(angle));
         outerBodyY = centerBodyY + (orbRadius * Math.sin(angle));  
     }
