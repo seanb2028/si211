@@ -5,8 +5,6 @@
  */
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.time.Clock;
 
 public class GUI extends JFrame implements GameListener {
     private Board board;
@@ -29,6 +27,7 @@ public class GUI extends JFrame implements GameListener {
 
         // BOARD
         board = new Board();
+        board.addBoardListener(clock);
         add(board, BorderLayout.CENTER);
 
         pack();

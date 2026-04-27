@@ -7,6 +7,9 @@ import java.util.*;
 
 public class Match implements TileStateListener {
     private List<Tile> tiles = new ArrayList<>();
+    private Board board;
+
+    public Match(Board b) { this.board = b; }
 
     // State listener method
     public void activated(Tile t) {
@@ -26,6 +29,7 @@ public class Match implements TileStateListener {
         if (matched) {
             for (Tile t : tiles)
                 t.permanentlyDisable();
+            board.checkAllTilesMatched();
         }
         else {
             for (Tile t : tiles) {

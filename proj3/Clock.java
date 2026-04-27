@@ -12,6 +12,7 @@ public class Clock extends JPanel implements BoardListener {
     private int time;
     private JButton start;
     private GameListener gListener;
+    private boolean gameWon = false;
 
     // Inner class for start button listener
     private class StartClickListener implements ActionListener {     
@@ -58,6 +59,7 @@ public class Clock extends JPanel implements BoardListener {
 
     @Override
     public void onGameWon() {
+        gameWon = true;
         stateText.setText("Congrats, you won! It took you " + (60 - time) + " seconds!");
         start.setText("exit");
     }
@@ -69,6 +71,9 @@ public class Clock extends JPanel implements BoardListener {
     // Our updater for our timer thread
     public void update() throws Exception { 
         while (time >= 0) {
+            if (gameWon) Thread.currentThread().interrupt();
+            if (Thread.interrupted()) return;
+
             timeLeft.setText(
                 ((time == 60) ? "01:" : "00:") + 
                 ((time < 10) ? "0" : "") +

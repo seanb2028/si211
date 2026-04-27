@@ -50,7 +50,8 @@ public class GUI extends JFrame {
 
         // ORBITS
         orbit = new DrawOrbit();
-        orbit.addOrbit(75, new Color(51, 255, 255));
+        orbit.addOrbit(50, new Color(51, 255, 255));
+        orbit.addOrbit(20, new Color(51, 51, 255));
         add(orbit, BorderLayout.CENTER);
 
         pack();
