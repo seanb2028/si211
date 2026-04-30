@@ -13,8 +13,10 @@ import si211.P3Tools;
 public class Board extends JPanel {
     private List<Tile> tiles = new ArrayList<>();
     private BoardListener bListener;
+    private Match match;
     
     public void disableAll() {
+        match.reset();
         for (Tile t : tiles)
             t.disable();
     }
@@ -37,10 +39,10 @@ public class Board extends JPanel {
     }
 
     // Add listener to the board
-    public void addBoardListener(BoardListener bL) { this.bListener = bL; }
+    protected void addBoardListener(BoardListener bL) { this.bListener = bL; }
 
     public Board() {
-        Match m = new Match(this);
+        match = new Match(this);
 
         setLayout(new GridLayout(6, 6, 0, 0));
         int[][] kindIDs = P3Tools.getRandomKindIdAssignments((int) System.currentTimeMillis(), 18, 6);
@@ -49,7 +51,7 @@ public class Board extends JPanel {
             for (int col = 0; col < 6; col++) {
                 Tile t = new Tile(row, col, kindIDs[row][col]);
                 tiles.add(t);
-                t.addTileStateListener(m);
+                t.addTileStateListener(match);
                 add(t);
             }
         }

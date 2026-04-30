@@ -12,10 +12,15 @@ public class TimerThread extends Thread {
    
     @Override
     public void run() {
-        try {
-            clock.update();
-        } catch (Exception e) {
-            e.printStackTrace();
+        while (clock.getTime() > 0) {
+            if (Thread.interrupted()) return;
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                return;
+            }
+            clock.updateClock();
         }
+        clock.onGameLost();
     }
 }

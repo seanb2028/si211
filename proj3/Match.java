@@ -11,6 +11,14 @@ public class Match implements TileStateListener {
 
     public Match(Board b) { this.board = b; }
 
+    public void reset() {
+        for (Tile t : tiles) {
+            t.setActivated(true);
+            t.enable();
+        }
+        tiles.clear();
+    }
+
     // State listener method
     public void activated(Tile t) {
         tiles.add(t);
