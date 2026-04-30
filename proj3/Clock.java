@@ -12,11 +12,10 @@ public class Clock extends JPanel implements BoardListener {
     private int time;
     private JButton start;
     private GameListener gListener;
+    private TimerThread tThread;
 
     // Inner class for start button listener
     private class StartClickListener implements ActionListener {     
-        private TimerThread tThread;
-
         // When someone clicks the button, run the timer
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -63,6 +62,10 @@ public class Clock extends JPanel implements BoardListener {
     public void onGameWon() {
         stateText.setText("Congrats, you won! It took you " + (60 - time) + " seconds!");
         start.setText("exit");
+
+        if (tThread != null) {
+            tThread.interrupt();
+        }
     }
     public void onGameLost() {
         stateText.setText("Sorry, you lost!");
